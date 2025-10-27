@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxavju1lx7ig4"
+path="res://.godot/imported/RUBRImpt_Water-Filled Bln Impact-27_SFRMS_Bln.wav-d8f84e9b168ca48244c0f863cbc4dafc.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Shapeforms Audio Free Sound Effects/Balloon Preview/RUBRImpt_Water-Filled Bln Impact-27_SFRMS_Bln.wav"
+dest_files=["res://.godot/imported/RUBRImpt_Water-Filled Bln Impact-27_SFRMS_Bln.wav-d8f84e9b168ca48244c0f863cbc4dafc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

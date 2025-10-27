@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://51i50nmwlebr"
+path="res://.godot/imported/Hyperspeed Warp Jump Implosion_05.wav-c6a5d79bdce4d7c807c30ad70fbcd6e9.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Shapeforms Audio Free Sound Effects/Sci Fi Warp Speed Preview/Hyperspeed Warp Jump Implosion_05.wav"
+dest_files=["res://.godot/imported/Hyperspeed Warp Jump Implosion_05.wav-c6a5d79bdce4d7c807c30ad70fbcd6e9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

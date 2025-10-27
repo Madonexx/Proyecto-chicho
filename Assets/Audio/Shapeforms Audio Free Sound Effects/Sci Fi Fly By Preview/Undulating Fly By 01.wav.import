@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cgsl405h86ybh"
+path="res://.godot/imported/Undulating Fly By 01.wav-2dddb3f57ecf3fe03f9df36be2ac556e.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Shapeforms Audio Free Sound Effects/Sci Fi Fly By Preview/Undulating Fly By 01.wav"
+dest_files=["res://.godot/imported/Undulating Fly By 01.wav-2dddb3f57ecf3fe03f9df36be2ac556e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxxixr1mr3qiv"
+path="res://.godot/imported/Heavy Spacecraft Takeoff_01.wav-9b9e2fd801c80e55319eb7041a5a4b5f.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Shapeforms Audio Free Sound Effects/Sci Fi Spacecraft Preview/Heavy Spacecraft Takeoff_01.wav"
+dest_files=["res://.godot/imported/Heavy Spacecraft Takeoff_01.wav-9b9e2fd801c80e55319eb7041a5a4b5f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

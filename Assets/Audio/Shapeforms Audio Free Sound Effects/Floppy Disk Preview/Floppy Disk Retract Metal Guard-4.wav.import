@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cr2qip8s8wpr0"
+path="res://.godot/imported/Floppy Disk Retract Metal Guard-4.wav-28a9e85fb593adf1081d09a9f17cc84a.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Shapeforms Audio Free Sound Effects/Floppy Disk Preview/Floppy Disk Retract Metal Guard-4.wav"
+dest_files=["res://.godot/imported/Floppy Disk Retract Metal Guard-4.wav-28a9e85fb593adf1081d09a9f17cc84a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

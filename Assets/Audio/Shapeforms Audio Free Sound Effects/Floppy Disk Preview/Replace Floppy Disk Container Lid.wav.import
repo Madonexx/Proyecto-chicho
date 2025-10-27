@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://nj0togq3w4ih"
+path="res://.godot/imported/Replace Floppy Disk Container Lid.wav-a9f057a3d6c4d1e57a49125ddd8acabf.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Shapeforms Audio Free Sound Effects/Floppy Disk Preview/Replace Floppy Disk Container Lid.wav"
+dest_files=["res://.godot/imported/Replace Floppy Disk Container Lid.wav-a9f057a3d6c4d1e57a49125ddd8acabf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

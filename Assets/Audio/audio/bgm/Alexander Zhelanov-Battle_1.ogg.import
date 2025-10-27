@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cc35iwx0onblo"
+path="res://.godot/imported/Alexander Zhelanov-Battle_1.ogg-cbc0b66772980e63710d168ab2dec41d.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/audio/bgm/Alexander Zhelanov-Battle_1.ogg"
+dest_files=["res://.godot/imported/Alexander Zhelanov-Battle_1.ogg-cbc0b66772980e63710d168ab2dec41d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
