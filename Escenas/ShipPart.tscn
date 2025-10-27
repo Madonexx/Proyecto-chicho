@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2cvwikx2lrpq"]
+
+[ext_resource type="Texture2D" uid="uid://cqijwgk4gqwn1" path="res://Assets/Sprites/Naves/support.png" id="1_beh85"]
+[ext_resource type="Script" uid="uid://dr2bdvcrpxjre" path="res://Scripts/OrbitalObject.gd" id="1_hy6wg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hy6wg"]
+radius = 30.0
+height = 73.0
+
+[node name="Ship Parts" type="RigidBody2D" groups=["ship_parts"]]
+script = ExtResource("1_hy6wg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_beh85")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("CapsuleShape2D_hy6wg")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -0.5)
+shape = SubResource("CapsuleShape2D_hy6wg")
+debug_color = Color(0.645989, 0.521894, 0, 0.42)
