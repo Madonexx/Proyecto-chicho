@@ -1,55 +1,26 @@
-[gd_scene load_steps=9 format=3 uid="uid://x5mprtvvadc8"]
+[gd_scene load_steps=7 format=3 uid="uid://x5mprtvvadc8"]
 
 [ext_resource type="Script" uid="uid://h5vogf18o6do" path="res://Scripts/main.gd" id="1_0kh0y"]
 [ext_resource type="Texture2D" uid="uid://c5lgx8db37pg" path="res://Assets/Sprites/Planetas/parallax-space-big-planet.png" id="1_vt1rs"]
-[ext_resource type="Texture2D" uid="uid://tmhw7axib7vi" path="res://Assets/Sprites/Astronautas/Astronaut-Sheet.png" id="2_0kh0y"]
-[ext_resource type="Script" uid="uid://e7ypdr4ow7ad" path="res://Scripts/asteroid_spawner.gd" id="4_7xwpo"]
-[ext_resource type="PackedScene" uid="uid://c2cvwikx2lrpq" path="res://Escenas/ShipPart.tscn" id="5_2ia52"]
+[ext_resource type="PackedScene" uid="uid://bawlu8u7j70d7" path="res://Escenas/player.tscn" id="4_7xwpo"]
+[ext_resource type="PackedScene" uid="uid://ci1a5vvdhc0co" path="res://Escenas/Asteroid.tscn" id="5_2ia52"]
 [ext_resource type="Texture2D" uid="uid://cc04xwhp476co" path="res://Assets/Fondos/Blue Nebula/Blue_Nebula_02-1024x1024.png" id="6_crgrh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7xwpo"]
 radius = 44.0114
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ia52"]
-size = Vector2(7, 7)
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0kh0y")
 
-[node name="Planet" type="Area2D" parent="."]
-gravity_space_override = 3
-gravity_point = true
-gravity = 100.0
+[node name="Planet" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+freeze = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Planet"]
 texture = ExtResource("1_vt1rs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Planet"]
 shape = SubResource("CircleShape2D_7xwpo")
-
-[node name="PlayerPivot" type="Node2D" parent="."]
-
-[node name="Player" type="Area2D" parent="PlayerPivot"]
-position = Vector2(0, -50)
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayerPivot/Player"]
-position = Vector2(1, -3)
-texture = ExtResource("2_0kh0y")
-hframes = 14
-vframes = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPivot/Player"]
-position = Vector2(1, -1)
-shape = SubResource("RectangleShape2D_2ia52")
-
-[node name="Spawners" type="Node" parent="."]
-
-[node name="AsteroidSpawner" type="Timer" parent="Spawners"]
-autostart = true
-script = ExtResource("4_7xwpo")
-asteroid_scene = ExtResource("5_2ia52")
-
-[node name="PartSpawner" type="Node" parent="Spawners"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -69,5 +40,9 @@ z_index = -10
 position = Vector2(53, -145)
 texture = ExtResource("6_crgrh")
 
-[connection signal="area_entered" from="PlayerPivot/Player" to="." method="_on_player_area_entered"]
-[connection signal="timeout" from="Spawners/AsteroidSpawner" to="Spawners/AsteroidSpawner" method="_on_timeout"]
+[node name="Player" parent="." instance=ExtResource("4_7xwpo")]
+position = Vector2(-2, -57)
+
+[node name="Asteroid" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("5_2ia52")]
+position = Vector2(-191, -71)
+planeta = NodePath("../Planet")

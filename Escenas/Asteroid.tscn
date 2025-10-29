@@ -1,27 +1,23 @@
 [gd_scene load_steps=4 format=3 uid="uid://ci1a5vvdhc0co"]
 
 [ext_resource type="Texture2D" uid="uid://beh5elvhwls4i" path="res://Assets/Sprites/Asteroides/asteroid-1.png" id="1_5rhwj"]
-[ext_resource type="Script" uid="uid://dr2bdvcrpxjre" path="res://Scripts/OrbitalObject.gd" id="1_sawdl"]
+[ext_resource type="Script" uid="uid://dvshh2w6otfye" path="res://Scripts/asteroid.gd" id="1_sawdl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sawdl"]
 radius = 9.0
 height = 24.0
 
-[node name="Asteroid" type="RigidBody2D" groups=["asteroids"]]
+[node name="Asteroid" type="Node2D" groups=["asteroids"]]
 script = ExtResource("1_sawdl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_5rhwj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(1, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_sawdl")
 
-[node name="Hitbox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(1, 0)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_sawdl")
-debug_color = Color(0.663075, 0.512889, 0.0136903, 0.42)
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
