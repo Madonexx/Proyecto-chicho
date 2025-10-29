@@ -11,9 +11,9 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func mover_jugador():
-	if Input.is_action_pressed("move_left"): # "A"
+	if Input.is_action_pressed("izquierda"): # "A"
 		position.x = position.x -1
-	if Input.is_action_pressed("move_right"): # "D"
+	if Input.is_action_pressed("derecha"): # "D"
 		position.x = position.x +1
 
 func ajustar_gravedad():
