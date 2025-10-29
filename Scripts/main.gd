@@ -2,11 +2,8 @@ extends Node2D
 
 @export var ship_part_scene: PackedScene
 @export var total_parts_to_win: int = 5 # Ajusta esto a cuantas partes haya
-@onready var player: Area2D = $PlayerPivot/Player
 
 # Referencias a nodos (arrástralos desde el editor o usa @onready)
-@onready var player_pivot: Node2D = $PlayerPivot
-@onready var player_node: Area2D = $PlayerPivot/Player
 @onready var gravity_bar: TextureProgressBar = $UI/GravitationalCalibrator
 @onready var parts_label: Label = $UI/PartsLabel
 
@@ -19,15 +16,11 @@ func _ready():
 	update_ui()
 	spawn_game_objects()
 
-func _process(delta):
-
-
+func _process(_delta):
 	update_ui()
-
 
 func update_ui():
 	parts_label.text = "Partes: %d / %d" % [parts_collected, total_parts_to_win]
-
 
 func _on_player_area_entered(area: Area2D):
 	# La 'area' que entró es la Hitbox. Queremos su "padre" (el RigidBody).
@@ -50,8 +43,6 @@ func _on_player_area_entered(area: Area2D):
 			# Aquí pones la lógica de victoria (ej. cambiar de escena)
 			get_tree().paused = true # Pausa el juego
 
-
 func spawn_game_objects():
-	# Aquí pones tu lógica para crear asteroides y partes de la nave
-	# Por ahora, nos enfocamos en el script de esos objetos.
+	# Aquí pones tu lógica para crear partes de la nave
 	pass
