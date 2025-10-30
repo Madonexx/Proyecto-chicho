@@ -21,6 +21,7 @@ texture = ExtResource("1_vt1rs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Planet"]
 shape = SubResource("CircleShape2D_7xwpo")
+disabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -41,7 +42,7 @@ position = Vector2(53, -145)
 texture = ExtResource("6_crgrh")
 
 [node name="Player" parent="." instance=ExtResource("4_7xwpo")]
-position = Vector2(-2, -57)
+position = Vector2(0, -56)
 
 [node name="Asteroid" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("5_2ia52")]
 position = Vector2(-191, -71)
