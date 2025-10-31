@@ -18,7 +18,7 @@ var progreso_orbita = 0.0
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("izquierda"): # "A"
 		
-		progreso_orbita -= velocidad * _delta
+		progreso_orbita -= velocidad * delta
 		var nueva_posicion = Vector2()
 		nueva_posicion.x = superficie.global_position.x + radionum * cos(progreso_orbita)
 		nueva_posicion.y = superficie.global_position.y + radionum * sin(progreso_orbita)
@@ -26,14 +26,13 @@ func _physics_process(delta: float) -> void:
 		position =  position - nueva_posicion
 
 	if Input.is_action_pressed("derecha"): # "D"
-		progreso_orbita += velocidad * _delta
+		progreso_orbita += velocidad * delta
 		var nueva_posicion = Vector2()
 		nueva_posicion.x = superficie.global_position.x + radionum * cos(progreso_orbita)
 		nueva_posicion.y = superficie.global_position.y + radionum * sin(progreso_orbita)
 		
 		position =  position + nueva_posicion
 
-	
 	mover_jugador()
 	ajustar_gravedad(delta)
 
