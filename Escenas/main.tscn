@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://x5mprtvvadc8"]
+[gd_scene load_steps=8 format=3 uid="uid://x5mprtvvadc8"]
 
 [ext_resource type="Script" uid="uid://h5vogf18o6do" path="res://Scripts/main.gd" id="1_0kh0y"]
 [ext_resource type="Texture2D" uid="uid://c5lgx8db37pg" path="res://Assets/Sprites/Planetas/parallax-space-big-planet.png" id="1_vt1rs"]
 [ext_resource type="PackedScene" uid="uid://bawlu8u7j70d7" path="res://Escenas/player.tscn" id="4_7xwpo"]
 [ext_resource type="PackedScene" uid="uid://ci1a5vvdhc0co" path="res://Escenas/Asteroid.tscn" id="5_2ia52"]
+[ext_resource type="Script" uid="uid://6kx3o0ikbfyk" path="res://Escenas/player.gd" id="5_crgrh"]
 [ext_resource type="Texture2D" uid="uid://cc04xwhp476co" path="res://Assets/Fondos/Blue Nebula/Blue_Nebula_02-1024x1024.png" id="6_crgrh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7xwpo"]
@@ -21,7 +22,6 @@ texture = ExtResource("1_vt1rs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Planet"]
 shape = SubResource("CircleShape2D_7xwpo")
-disabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -42,8 +42,14 @@ position = Vector2(53, -145)
 texture = ExtResource("6_crgrh")
 
 [node name="Player" parent="." instance=ExtResource("4_7xwpo")]
-position = Vector2(0, -56)
+position = Vector2(0, -54)
+script = ExtResource("5_crgrh")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Player"]
 
 [node name="Asteroid" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("5_2ia52")]
 position = Vector2(-191, -71)
 planeta = NodePath("../Planet")
+
+[connection signal="screen_entered" from="Player/VisibleOnScreenNotifier2D" to="Player" method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="Player/VisibleOnScreenNotifier2D" to="Player" method="_on_visible_on_screen_notifier_2d_screen_exited"]
