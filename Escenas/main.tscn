@@ -9,12 +9,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7xwpo"]
 radius = 44.0114
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node"]
 script = ExtResource("1_0kh0y")
 
 [node name="Planet" type="RigidBody2D" parent="."]
 gravity_scale = 0.0
 freeze = true
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Planet"]
 texture = ExtResource("1_vt1rs")
@@ -27,10 +28,12 @@ shape = SubResource("CircleShape2D_7xwpo")
 [node name="GravitationalCalibrator" type="TextureProgressBar" parent="UI"]
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="PartsLabel" type="Label" parent="UI"]
 offset_right = 40.0
 offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)

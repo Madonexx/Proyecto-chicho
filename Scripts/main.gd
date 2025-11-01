@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 @export var ship_part_scene: PackedScene
 @export var total_parts_to_win: int = 5

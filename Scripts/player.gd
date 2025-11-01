@@ -23,5 +23,3 @@ func ajustar_gravedad(delta):
 	if Input.is_action_pressed("alejar"):
 		var alejarse = position.normalized()
 		position += alejarse * vel_gravedad * delta
-		pass
-	pass
