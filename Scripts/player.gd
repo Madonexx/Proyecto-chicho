@@ -5,6 +5,11 @@ extends Area2D
 @export var rotation_speed: float = 2.5   # Velocidad de A/D (radianes/seg)
 @export var radial_speed: float = 150.0  # Velocidad del mouse (píxeles/seg)
 
+# ¡NUEVA VARIABLE! Define dónde carga la parte.
+# (0, -60) significa 60 píxeles "arriba" de la cabeza del jugador.
+# ¡Puedes ajustar este valor en el Inspector!
+@export var carry_offset: Vector2 = Vector2(0, -20)
+
 # --- Referencias ---
 # ¡Arrastra tu nodo Planeta (el Area2D) aquí en el Inspector!
 @export var planet_node: Area2D 
@@ -83,9 +88,14 @@ func _physics_process(delta: float) -> void:
 		else:
 			pickup_part()
 	
-	# ¡YA NO HAY MOVE_AND_SLIDE()!
-
-
+# --- 7. ¡NUEVO! Mover la parte si la estamos cargando ---
+	if carried_part:
+		# Calculamos el offset "arriba" del jugador, rotado con el jugador
+		var rotated_offset = carry_offset.rotated(rotation)
+		# Movemos la parte a esa posición global
+		carried_part.global_position = global_position + rotated_offset
+		# (Opcional) hacer que la parte rote junto con el jugador
+		carried_part.rotation = rotation
 # --- FUNCIONES DE AGARRE (COPIA Y PEGA TUS FUNCIONES ANTIGUAS) ---
 # (Estas funciones no necesitan cambiar en absoluto)
 
@@ -93,27 +103,34 @@ func pickup_part():
 	var bodies = grabber_area.get_overlapping_bodies()
 	for body in bodies:
 		if body.is_in_group("ship_parts"):
+			if body.is_being_carried:
+				continue
 			carried_part = body
-			carried_part.pickup(self)
-			print("¡Parte recogida!")
+			carried_part.pickup()
+			print("Parte agarrada")
 			break
 
 func drop_part():
 	if not carried_part:
 		return
 	var areas = grabber_area.get_overlapping_areas()
+	var delivered = false
+	
 	for area in areas:
 		if area.is_in_group("ship_base"):
 			print("¡Parte entregada!")
 			get_parent().deliver_part()
 			carried_part.queue_free()
-			carried_part = null
-			return
+			delivered = true
+			break
 
+	if delivered:
+		carried_part = null
+		return
+		
 	print("Parte soltada.")
-	var part_to_drop = carried_part
+	carried_part.drop(false)
 	carried_part = null
-	part_to_drop.drop(get_parent(), global_position)
 
 
 func _on_area_entered(area: Area2D) -> void:

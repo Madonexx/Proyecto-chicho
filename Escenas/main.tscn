@@ -75,5 +75,16 @@ rotation = 1.1571532
 scale = Vector2(0.1, 0.1)
 
 [node name="ShipPart" parent="." instance=ExtResource("9_1md0r")]
-position = Vector2(0, -134)
-scale = Vector2(0.5, 0.5)
+position = Vector2(177.99998, -123)
+
+[node name="ShipPart2" parent="." instance=ExtResource("9_1md0r")]
+position = Vector2(-230.00002, -125)
+
+[node name="ShipPart3" parent="." instance=ExtResource("9_1md0r")]
+position = Vector2(-195, 63)
+
+[node name="ShipPart4" parent="." instance=ExtResource("9_1md0r")]
+position = Vector2(68, 42)
+
+[node name="ShipPart5" parent="." instance=ExtResource("9_1md0r")]
+position = Vector2(-39, -131)
