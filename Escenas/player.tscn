@@ -9,8 +9,10 @@ size = Vector2(7, 9)
 [sub_resource type="CircleShape2D" id="CircleShape2D_i8vih"]
 radius = 7.0
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="Area2D" groups=["player"]]
 script = ExtResource("1_i8vih")
+rotation_speed = 1.5
+min_radius = 155.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cnkc8")
@@ -27,3 +29,5 @@ shape = SubResource("RectangleShape2D_i8vih")
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_i8vih")
 debug_color = Color(0.95763713, 4.813075e-07, 0.53411597, 0.41960785)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

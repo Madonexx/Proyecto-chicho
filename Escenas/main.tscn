@@ -27,6 +27,11 @@ texture = ExtResource("1_vt1rs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Planet"]
 shape = SubResource("CircleShape2D_7xwpo")
 
+[node name="Planet" type="Area2D" parent="Planet"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Planet/Planet"]
+shape = SubResource("CircleShape2D_7xwpo")
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="GravitationalCalibrator" type="TextureProgressBar" parent="UI"]
@@ -47,8 +52,10 @@ z_index = -10
 position = Vector2(53, -145)
 texture = ExtResource("6_crgrh")
 
-[node name="Player" parent="." instance=ExtResource("4_7xwpo")]
+[node name="Player" parent="." node_paths=PackedStringArray("planet_node") instance=ExtResource("4_7xwpo")]
 position = Vector2(1, -52)
+planet_node = NodePath("../Planet/Planet")
+min_radius = 45.0
 
 [node name="Asteroid" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("5_2ia52")]
 position = Vector2(-191, -71)

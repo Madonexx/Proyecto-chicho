@@ -29,14 +29,3 @@ func _process(delta):
 	# 3. Girar el sprite sobre su propio eje
 	if sprite:
 		sprite.rotate(velocidad_rotacion * delta)
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		print("¡El jugador ha perdido!")
-
-		# Se recarga la escena o se muestra escena de game over o le sacamos una vida
-		get_tree().reload_current_scene()
-		
-		# O puedes llamar a una función en el jugador:
-		# if body.has_method("morir"):
-		#     body.morir()
