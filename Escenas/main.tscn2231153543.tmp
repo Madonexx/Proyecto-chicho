@@ -1,14 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://x5mprtvvadc8"]
+[gd_scene load_steps=7 format=3 uid="uid://x5mprtvvadc8"]
 
 [ext_resource type="Script" uid="uid://h5vogf18o6do" path="res://Scripts/main.gd" id="1_0kh0y"]
 [ext_resource type="Texture2D" uid="uid://c5lgx8db37pg" path="res://Assets/Sprites/Planetas/parallax-space-big-planet.png" id="1_vt1rs"]
 [ext_resource type="PackedScene" uid="uid://bawlu8u7j70d7" path="res://Escenas/player.tscn" id="4_7xwpo"]
 [ext_resource type="PackedScene" uid="uid://ci1a5vvdhc0co" path="res://Escenas/Asteroid.tscn" id="5_2ia52"]
 [ext_resource type="Texture2D" uid="uid://cc04xwhp476co" path="res://Assets/Fondos/Blue Nebula/Blue_Nebula_02-1024x1024.png" id="6_crgrh"]
-[ext_resource type="PackedScene" uid="uid://cxp5p8q6if6nw" path="res://Escenas/AsteroidB.tscn" id="6_s2ilj"]
-[ext_resource type="PackedScene" uid="uid://ochbidsbmyan" path="res://Escenas/Asteroidc.tscn" id="7_s2ilj"]
-[ext_resource type="PackedScene" uid="uid://b48ahqgg2s5eo" path="res://Escenas/ShipBase.tscn" id="8_ktoa8"]
-[ext_resource type="PackedScene" uid="uid://llvb0wbdjdq3" path="res://Escenas/ShipPart.tscn" id="9_1md0r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7xwpo"]
 radius = 44.0114
@@ -48,25 +44,8 @@ position = Vector2(53, -145)
 texture = ExtResource("6_crgrh")
 
 [node name="Player" parent="." instance=ExtResource("4_7xwpo")]
-position = Vector2(1, -52)
+position = Vector2(0, -50)
 
 [node name="Asteroid" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("5_2ia52")]
 position = Vector2(-191, -71)
 planeta = NodePath("../Planet")
-
-[node name="Asteroid2" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("6_s2ilj")]
-position = Vector2(-160, 45)
-planeta = NodePath("../Planet")
-
-[node name="Asteroid3" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("7_s2ilj")]
-position = Vector2(120, -68)
-planeta = NodePath("../Planet")
-
-[node name="ShipBase" parent="." instance=ExtResource("8_ktoa8")]
-position = Vector2(49.000004, -19.000002)
-rotation = 1.1571532
-scale = Vector2(0.1, 0.1)
-
-[node name="ShipPart" parent="." instance=ExtResource("9_1md0r")]
-position = Vector2(0, -134)
-scale = Vector2(0.5, 0.5)

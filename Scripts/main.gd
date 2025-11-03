@@ -16,3 +16,12 @@ func _process(_delta):
 
 func update_ui():
 	parts_label.text = "Partes: %d / %d" % [parts_collected, total_parts_to_win]
+	
+func deliver_part():
+	parts_collected += 1
+	update_ui()
+	
+	if parts_collected >= total_parts_to_win:
+		print("¡HAS GANADO! Nave reparada.")
+		# Aquí pones tu lógica de victoria
+		get_tree().paused = true

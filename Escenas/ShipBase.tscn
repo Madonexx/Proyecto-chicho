@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b48ahqgg2s5eo"]
+
+[ext_resource type="Texture2D" uid="uid://bjlvtcdfypxyy" path="res://Assets/Sprites/Naves/SpaceShip.png" id="1_tgihc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w5cvd"]
+radius = 126.0
+
+[node name="ShipBase" type="Node2D"]
+
+[node name="ShipBase" type="Area2D" parent="." groups=["ship_base"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="ShipBase"]
+texture = ExtResource("1_tgihc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipBase"]
+position = Vector2(2, 14)
+shape = SubResource("CircleShape2D_w5cvd")

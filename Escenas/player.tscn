@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bawlu8u7j70d7"]
+[gd_scene load_steps=5 format=3 uid="uid://bawlu8u7j70d7"]
 
 [ext_resource type="Texture2D" uid="uid://tmhw7axib7vi" path="res://Assets/Sprites/Astronautas/Astronaut-Sheet.png" id="1_cnkc8"]
 [ext_resource type="Script" uid="uid://bunqlef0trbxc" path="res://Scripts/player.gd" id="1_i8vih"]
@@ -6,9 +6,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i8vih"]
 size = Vector2(7, 9)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_i8vih"]
+radius = 7.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_i8vih")
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cnkc8")
@@ -18,3 +20,10 @@ vframes = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(-0.5, 2.5)
 shape = SubResource("RectangleShape2D_i8vih")
+
+[node name="Grabber" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grabber"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_i8vih")
+debug_color = Color(0.95763713, 4.813075e-07, 0.53411597, 0.41960785)

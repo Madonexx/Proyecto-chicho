@@ -4,20 +4,21 @@ extends CharacterBody2D
 @onready var player: CharacterBody2D = $"."
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var superficie: RigidBody2D = $"../Planet"
-
 @onready var vel_gravedad = 100
 
 #velocidad del progrso de la orbita del jugador
 @onready var velocidad_orbita = 1.05
-
 @onready var asteroid: Node2D = $"../Asteroid"
-
 #radio de la orbita del jugador al estar en la superficie (contra mas alto mas grande la circunferencia)
 @onready var radio_a = 0.9
 @onready var radio_b = 0.9
-
 var progreso_orbita = 0.0
 
+
+
+#Nuevo agarre de partes
+var carried_part: RigidBody2D = null
+@onready var grabber_area: Area2D = $Grabber
 
 func _physics_process(delta: float) -> void:
 
@@ -79,3 +80,62 @@ func ajustar_gravedad(delta):
 		position += alejarse * vel_gravedad * delta
 		pass
 	pass
+
+# --- Lógica de Agarrar/Soltar ---
+	if Input.is_action_just_pressed("interact"):
+		if carried_part:
+			# Si ya estamos cargando algo, lo soltamos
+			drop_part()
+		else:
+			# Si no, intentamos recoger algo
+			pickup_part()
+
+
+func pickup_part():
+	# Revisa todos los cuerpos físicos que la "mano" está tocando
+	var bodies = grabber_area.get_overlapping_bodies()
+	
+	for body in bodies:
+		# Si uno de esos cuerpos es una "ship_part"...
+		if body.is_in_group("ship_parts"):
+			# Guardamos la referencia
+			carried_part = body
+			
+			# ¡Llamamos a la función del script de la parte!
+			carried_part.pickup(self)
+			
+			print("¡Parte recogida!")
+			break # Dejamos de buscar, solo podemos cargar una
+
+
+func drop_part():
+	if not carried_part:
+		return
+
+	# Revisa si estamos en la zona de entrega
+	var areas = grabber_area.get_overlapping_areas()
+	for area in areas:
+		# Si la "mano" está tocando la "ship_base"...
+		if area.is_in_group("ship_base"):
+			
+			# ¡ES UNA ENTREGA!
+			print("¡Parte entregada!")
+			
+			# 1. Llama a la función de Main.gd para sumar puntos
+			get_parent().deliver_part()
+			
+			# 2. Destruye la parte
+			carried_part.queue_free()
+			carried_part = null
+			return # Salimos de la función
+
+	# --- Si no es una entrega, es un "drop" normal ---
+	print("Parte soltada.")
+	
+	var part_to_drop = carried_part
+	carried_part = null
+	
+	# ¡Llamamos a la función del script de la parte!
+	# Le decimos que el nuevo "padre" es la escena Main (get_parent())
+	# y que la suelte en nuestra posición actual
+	part_to_drop.drop(get_parent(), global_position)

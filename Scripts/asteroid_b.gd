@@ -1,10 +1,10 @@
 extends Node2D
 ## Exporta las variables para ajustarlas desde el Inspector
 @export var planeta: Node2D          # Arrastra tu nodo 'Planeta' aquí
-@export var velocidad_orbita = 1   # Qué tan rápido orbita (radianes/seg)
-@export var velocidad_rotacion = 1 # Qué tan rápido gira sobre sí mismo
-@export var radio_a = 100.0          # El radio horizontal de la elipse
-@export var radio_b = 100.0          # El radio vertical de la elipse
+@export var velocidad_orbita = 2   # Qué tan rápido orbita (radianes/seg)
+@export var velocidad_rotacion = 2 # Qué tan rápido gira sobre sí mismo
+@export var radio_a = 200.0          # El radio horizontal de la elipse
+@export var radio_b = 200.0          # El radio vertical de la elipse
 
 # Variable interna para rastrear el progreso de la órbita
 var progreso_orbita = 0.0

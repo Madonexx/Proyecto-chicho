@@ -1,25 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2cvwikx2lrpq"]
+[gd_scene load_steps=4 format=3 uid="uid://llvb0wbdjdq3"]
 
-[ext_resource type="Texture2D" uid="uid://cqijwgk4gqwn1" path="res://Assets/Sprites/Naves/support.png" id="1_beh85"]
-[ext_resource type="Script" uid="uid://dr2bdvcrpxjre" path="res://Scripts/OrbitalObject.gd" id="1_hy6wg"]
+[ext_resource type="Texture2D" uid="uid://cx57kv5ufvd1k" path="res://Assets/Sprites/Naves/rocket.png" id="1_beh85"]
+[ext_resource type="Script" uid="uid://b1a5x0rhmelkj" path="res://Scripts/ship_part.gd" id="1_hy6wg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hy6wg"]
-radius = 30.0
-height = 73.0
+radius = 7.0
+height = 58.0
 
-[node name="Ship Parts" type="RigidBody2D" groups=["ship_parts"]]
+[node name="ShipPart" type="Node2D"]
+
+[node name="ShipPart" type="RigidBody2D" parent="." groups=["ship_parts"]]
+freeze = true
 script = ExtResource("1_hy6wg")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="ShipPart"]
 texture = ExtResource("1_beh85")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipPart"]
+position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_hy6wg")
-
-[node name="Hitbox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, -0.5)
-shape = SubResource("CapsuleShape2D_hy6wg")
-debug_color = Color(0.645989, 0.521894, 0, 0.42)
