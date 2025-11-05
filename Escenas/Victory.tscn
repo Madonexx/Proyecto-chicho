@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://kq5y4a6aiymt"]
+
+[ext_resource type="Script" uid="uid://bxg2bjtfvg06a" path="res://Scripts/victoria.gd" id="1_bdcpr"]
+[ext_resource type="Texture2D" uid="uid://djoxx5nvjvv4m" path="res://Assets/UI/Victoria.png" id="2_weo2q"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_bdcpr")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -5
+layout_mode = 0
+offset_left = -6.0
+offset_top = -7.0
+offset_right = 1018.0
+offset_bottom = 1017.0
+texture = ExtResource("2_weo2q")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 9.0
+offset_right = 747.0
+offset_bottom = 97.0
+theme_override_font_sizes/font_size = 64
+text = "Victoria"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 391.0
+offset_top = 136.0
+offset_right = 823.0
+offset_bottom = 232.0
+theme_override_font_sizes/font_size = 64
+text = "Volver a jugar"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 261.0
+offset_right = 851.0
+offset_bottom = 357.0
+theme_override_font_sizes/font_size = 64
+text = "Volver al Menú"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

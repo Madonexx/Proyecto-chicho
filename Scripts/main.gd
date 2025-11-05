@@ -22,6 +22,4 @@ func deliver_part():
 	update_ui()
 	
 	if parts_collected >= total_parts_to_win:
-		print("¡HAS GANADO! Nave reparada.")
-		#Agregar cambio de escena? mostrar animacion de ganar
-		get_tree().paused = true
+		SceneManager.cambiar_escena ("res://Escenas/Victory.tscn")

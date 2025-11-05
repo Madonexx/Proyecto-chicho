@@ -107,4 +107,4 @@ func drop_part():
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("asteroids"):
 		print("¡CHOQUE! Has perdido.")
-		get_tree().reload_current_scene()
+		SceneManager.cambiar_escena("res://Escenas/Defeat.tscn")
