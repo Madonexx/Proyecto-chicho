@@ -1,32 +1,20 @@
-# ¡MUY IMPORTANTE! Asegúrate de que hereda de Area2D
 extends Area2D
-
 # --- Variables de Movimiento ---
 @export var rotation_speed: float = 2.5   # Velocidad de A/D (radianes/seg)
 @export var radial_speed: float = 150.0  # Velocidad del mouse (píxeles/seg)
-
-# ¡NUEVA VARIABLE! Define dónde carga la parte.
-# (0, -60) significa 60 píxeles "arriba" de la cabeza del jugador.
-# ¡Puedes ajustar este valor en el Inspector!
-@export var carry_offset: Vector2 = Vector2(0, -20)
-
-# --- Referencias ---
-# ¡Arrastra tu nodo Planeta (el Area2D) aquí en el Inspector!
 @export var planet_node: Area2D 
-
-# Mínima distancia (radio del planeta) y máxima
+# Distancia max y min sobre el radio del planeta.
 @export var min_radius: float = 150.0 
 @export var max_radius: float = 600.0
-
-@onready var sprite_2d: Sprite2D = $Sprite2D
-
-# --- Variables de Agarre (SIN CAMBIOS) ---
-var carried_part: RigidBody2D = null
-@onready var grabber_area: Area2D = $Grabber
-
-# --- Variables de Posición ---
 var current_angle: float = 0.0     # Nuestro ángulo orbital
 var current_radius: float = 200.0  # Nuestra distancia al centro
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
+# --- Variables de Agarre 
+var carried_part: RigidBody2D = null
+@onready var grabber_area: Area2D = $Grabber
+#Variable de offset entre el asset del astronauta y el asset de la parte
+@export var carry_offset: Vector2 = Vector2(0, -20)
 
 
 func _ready():
@@ -35,60 +23,44 @@ func _ready():
 		var start_vector = global_position - planet_node.global_position
 		current_angle = start_vector.angle()
 		current_radius = start_vector.length()
-	else:
-		print("ERROR: ¡El nodo 'planet_node' no está asignado en el Player!")
-
 
 func _physics_process(delta: float) -> void:
-	
-	if not planet_node:
-		return # No hacer nada si el planeta no está asignado
 
-	# --- 1. Input Rotacional (A/D) ---
-	if Input.is_action_pressed("izquierda"): # "A"
+	if Input.is_action_pressed("izquierda"): # A o flecha izq
 		current_angle -= rotation_speed * delta
 		sprite_2d.flip_h = true
 	
-	if Input.is_action_pressed("derecha"): # "D"
+	if Input.is_action_pressed("derecha"): # D o flecha der
 		current_angle += rotation_speed * delta
 		sprite_2d.flip_h = false
 
-	# --- 2. Input Radial (Mouse) ---
-	# Usamos los nombres que tenías: "acercar" y "alejar"
-	if Input.is_action_pressed("acercar"):
+	if Input.is_action_pressed("acercar"): # Click Izq
 		current_radius -= radial_speed * delta
 	
-	if Input.is_action_pressed("alejar"):
+	if Input.is_action_pressed("alejar"): # Click der
 		current_radius += radial_speed * delta
 	
-	# --- 3. Limitar el radio ---
 	# Evita que el jugador se meta al planeta o se vaya muy lejos
 	current_radius = clamp(current_radius, min_radius, max_radius)
 
-	# --- 4. Calcular y Aplicar Posición ---
+	# Posiciones
 	# Obtenemos la posición central del planeta
 	var planet_center = planet_node.global_position
-	
-	# Calculamos el offset (desplazamiento) usando trigonometría
+	# Calculamos el offset (desplazamiento)
 	var offset = Vector2.RIGHT.rotated(current_angle) * current_radius
-	
-	# ¡Aplicamos la nueva posición directamente!
 	global_position = planet_center + offset
 
-	# --- 5. Rotar el Sprite ---
 	# Hacemos que los "pies" apunten al planeta
 	var direction_to_planet = (planet_center - global_position).normalized()
 	rotation = direction_to_planet.angle() - deg_to_rad(90)
 
-	# --- 6. Lógica de Agarre (SIN CAMBIOS) ---
-	# Esta lógica funciona igual que antes
+	# --- 6. Lógica de Agarre
 	if Input.is_action_just_pressed("interact"):
 		if carried_part:
 			drop_part()
 		else:
 			pickup_part()
 	
-# --- 7. ¡NUEVO! Mover la parte si la estamos cargando ---
 	if carried_part:
 		# Calculamos el offset "arriba" del jugador, rotado con el jugador
 		var rotated_offset = carry_offset.rotated(rotation)
@@ -96,8 +68,7 @@ func _physics_process(delta: float) -> void:
 		carried_part.global_position = global_position + rotated_offset
 		# (Opcional) hacer que la parte rote junto con el jugador
 		carried_part.rotation = rotation
-# --- FUNCIONES DE AGARRE (COPIA Y PEGA TUS FUNCIONES ANTIGUAS) ---
-# (Estas funciones no necesitan cambiar en absoluto)
+
 
 func pickup_part():
 	var bodies = grabber_area.get_overlapping_bodies()
@@ -132,14 +103,8 @@ func drop_part():
 	carried_part.drop(false)
 	carried_part = null
 
-
+#Condicion de derrota
 func _on_area_entered(area: Area2D) -> void:
-# 'area' es el Area2D que entró en nosotros (el Asteroide).
-	# Verificamos si esa área pertenece al grupo "asteroids".
 	if area.is_in_group("asteroids"):
-		
-		# ¡COLISIÓN!
 		print("¡CHOQUE! Has perdido.")
-		
-		# Reiniciamos la escena actual
 		get_tree().reload_current_scene()

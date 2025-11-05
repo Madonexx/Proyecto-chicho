@@ -23,5 +23,5 @@ func deliver_part():
 	
 	if parts_collected >= total_parts_to_win:
 		print("¡HAS GANADO! Nave reparada.")
-		# Aquí pones tu lógica de victoria
+		#Agregar cambio de escena? mostrar animacion de ganar
 		get_tree().paused = true

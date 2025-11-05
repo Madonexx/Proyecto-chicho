@@ -1,31 +1,21 @@
 extends Node2D
-## Exporta las variables para ajustarlas desde el Inspector
-@export var planeta: Node2D          # Arrastra tu nodo 'Planeta' aquí
+@export var planeta: Node2D
 @export var velocidad_orbita = 1.5   # Qué tan rápido orbita (radianes/seg)
 @export var velocidad_rotacion = 1.5 # Qué tan rápido gira sobre sí mismo
-@export var radio_a = 150.0          # El radio horizontal de la elipse
-@export var radio_b = 150.0          # El radio vertical de la elipse
-
-# Variable interna para rastrear el progreso de la órbita
-var progreso_orbita = 0.0
-
-# Obtenemos la referencia al sprite para hacerlo girar
+@export var radio_a = 150       # El radio horizontal de la elipse
+@export var radio_b = 150         # El radio vertical de la elipse
+var progreso_orbita = 0
 @onready var sprite = $Sprite2D
 
 func _process(delta):
-	# 1. Incrementar el progreso de la órbita
 	progreso_orbita += velocidad_orbita * delta
-	
 	# 2. Calcular la nueva posición usando trigonometría (fórmula de la elipse)
 	if planeta:
 		var centro = planeta.global_position
 		var nueva_posicion = Vector2()
 		nueva_posicion.x = centro.x + radio_a * cos(progreso_orbita)
 		nueva_posicion.y = centro.y + radio_b * sin(progreso_orbita)
-		
-		# Asignar la posición global al asteroide
 		global_position = nueva_posicion
-	
-	# 3. Girar el sprite sobre su propio eje
+	# Girar el sprite sobre su propio eje
 	if sprite:
 		sprite.rotate(velocidad_rotacion * delta)
