@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqiiqd0wd0a5h"]
+[gd_scene load_steps=4 format=3 uid="uid://dqiiqd0wd0a5h"]
 
 [ext_resource type="Script" uid="uid://brg8vpya2jgcl" path="res://Scripts/main_menu.gd" id="1_3bb84"]
 [ext_resource type="Texture2D" uid="uid://bm7rrxbu3vku6" path="res://Assets/UI/Menu.png" id="2_jg0v5"]
+[ext_resource type="AudioStream" uid="uid://cc35iwx0onblo" path="res://Assets/Audio/audio/bgm/Alexander Zhelanov-Battle_1.ogg" id="3_ij1hm"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -41,5 +42,10 @@ offset_right = 574.0
 offset_bottom = 451.0
 theme_override_font_sizes/font_size = 64
 text = "Comenzar"
+
+[node name="musica" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ij1hm")
+volume_db = -14.0
+autoplay = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

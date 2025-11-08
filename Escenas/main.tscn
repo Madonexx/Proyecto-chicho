@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://x5mprtvvadc8"]
+[gd_scene load_steps=12 format=3 uid="uid://x5mprtvvadc8"]
 
 [ext_resource type="Script" uid="uid://h5vogf18o6do" path="res://Scripts/main.gd" id="1_0kh0y"]
 [ext_resource type="Texture2D" uid="uid://c5lgx8db37pg" path="res://Assets/Sprites/Planetas/parallax-space-big-planet.png" id="1_vt1rs"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ochbidsbmyan" path="res://Escenas/Asteroidc.tscn" id="7_s2ilj"]
 [ext_resource type="PackedScene" uid="uid://b48ahqgg2s5eo" path="res://Escenas/ShipBase.tscn" id="8_ktoa8"]
 [ext_resource type="PackedScene" uid="uid://llvb0wbdjdq3" path="res://Escenas/ShipPart.tscn" id="9_1md0r"]
+[ext_resource type="AudioStream" uid="uid://bde8rn70k8og8" path="res://Assets/Audio/audio/bgm/DST-AngryMod.ogg" id="10_n3qho"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7xwpo"]
 radius = 44.0114
@@ -55,7 +56,7 @@ texture = ExtResource("6_crgrh")
 [node name="Player" parent="." node_paths=PackedStringArray("planet_node") instance=ExtResource("4_7xwpo")]
 position = Vector2(1, -52)
 planet_node = NodePath("../Planet/Planet")
-min_radius = 45.0
+min_radius = 52.0
 
 [node name="Asteroid" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("5_2ia52")]
 position = Vector2(-191, -71)
@@ -88,3 +89,8 @@ position = Vector2(68, 42)
 
 [node name="ShipPart5" parent="." instance=ExtResource("9_1md0r")]
 position = Vector2(-39, -131)
+
+[node name="level_music_1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_n3qho")
+volume_db = -14.0
+autoplay = true
