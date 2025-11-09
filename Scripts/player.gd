@@ -90,17 +90,12 @@ func pickup_part():
 	var bodies = grabber_area.get_overlapping_bodies()
 	for body in bodies:
 		if body.is_in_group("ship_parts"):
-			if body.is_being_carried:
-				continue
 			carried_part = body
 			carried_part.pickup()
-			
 			print("Parte agarrada")
 			break
 
 func drop_part():
-	if not carried_part:
-		return
 	var areas = grabber_area.get_overlapping_areas()
 	var delivered = false
 	
