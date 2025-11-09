@@ -56,7 +56,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("alejar") and can_move == true: # Click der
 		current_radius += radial_speed * delta
 
-	
 	# Evita que el jugador se meta al planeta o se vaya muy lejos
 	current_radius = clamp(current_radius, min_radius, max_radius)
 

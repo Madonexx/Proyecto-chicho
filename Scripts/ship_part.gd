@@ -4,7 +4,7 @@ var is_being_carried: bool = false
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	girar_parte()
 
 func pickup():
@@ -20,7 +20,7 @@ func girar_parte():
 	
 	rotation += rotarvalor * quelado
 
-func drop(is_delivered: bool):
+func drop(_is_delivered: bool):
 	is_being_carried = false
 	
 	#Este codigo depende de nosotros queremos que se congele la nave cuando la suelto o que tome fisica?
