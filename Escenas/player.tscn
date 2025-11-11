@@ -1,9 +1,14 @@
-[gd_scene load_steps=21 format=3 uid="uid://bawlu8u7j70d7"]
+[gd_scene load_steps=29 format=3 uid="uid://bawlu8u7j70d7"]
 
 [ext_resource type="Texture2D" uid="uid://tmhw7axib7vi" path="res://Assets/Sprites/Astronautas/Astronaut-Sheet.png" id="1_cnkc8"]
 [ext_resource type="Script" uid="uid://bunqlef0trbxc" path="res://Scripts/player.gd" id="1_i8vih"]
 [ext_resource type="Texture2D" uid="uid://c7t2akbco8ey4" path="res://Assets/Sprites/Astronautas/efectos de astronauta/FFLbOE (2).png" id="3_qgqwx"]
 [ext_resource type="AudioStream" uid="uid://ccvc1gf62y6uy" path="res://Assets/Audio/audio/se/Collapse3.ogg" id="4_6njrx"]
+[ext_resource type="Texture2D" uid="uid://b6i6tixldfwae" path="res://Assets/Sprites/Astronautas/Gancho.png" id="5_cgfde"]
+[ext_resource type="Texture2D" uid="uid://d0c2vtl7d72d6" path="res://Assets/Sprites/Astronautas/efectos de astronauta/New Piskel.png" id="6_xlwfv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v5l4"]
+size = Vector2(9, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6njrx"]
 atlas = ExtResource("3_qgqwx")
@@ -105,38 +110,162 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i8vih"]
-size = Vector2(7, 9)
+size = Vector2(8, 9)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_i8vih"]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xlwfv"]
+size = Vector2(24.999998, 29.000004)
 
-[node name="Player" type="Area2D" groups=["player"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgfde"]
+size = Vector2(54.3351, 7.212247)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2eo5y"]
+atlas = ExtResource("6_xlwfv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tf0n"]
+atlas = ExtResource("6_xlwfv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y153w"]
+atlas = ExtResource("6_xlwfv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6hcl0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2eo5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tf0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y153w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_i8vih")
 rotation_speed = 1.5
 min_radius = 155.0
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_7v5l4")
+debug_color = Color(0.34037086, 0.6143126, 0.27957296, 0.41960785)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("1_cnkc8")
 hframes = 14
 vframes = 4
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["player"]]
 visible = false
 sprite_frames = SubResource("SpriteFrames_2eo5y")
 
-[node name="muerte" type="AudioStreamPlayer2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
+position = Vector2(-1, 2.5)
+shape = SubResource("RectangleShape2D_i8vih")
+
+[node name="muerte" type="AudioStreamPlayer2D" parent="." groups=["player"]]
 stream = ExtResource("4_6njrx")
 volume_db = -7.068
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
-position = Vector2(-0.5, 2.5)
-shape = SubResource("RectangleShape2D_i8vih")
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["player"]]
+position = Vector2(3, 5)
+rect = Rect2(-10, -10, 13, 13)
 
-[node name="Grabber" type="Area2D" parent="."]
+[node name="gancho" type="Area2D" parent="." groups=["player"]]
+position = Vector2(1, 5)
+rotation = -3.1415927
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grabber"]
-position = Vector2(0, 2)
-shape = SubResource("CircleShape2D_i8vih")
-debug_color = Color(0.95763713, 4.813075e-07, 0.53411597, 0.41960785)
+[node name="Sprite2D" type="Sprite2D" parent="gancho"]
+visible = false
+position = Vector2(-6.000001, 3.9999993)
+scale = Vector2(0.2831626, 0.2831626)
+texture = ExtResource("5_cgfde")
+centered = false
+offset = Vector2(-30, 0)
+flip_h = true
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gancho"]
+position = Vector2(1.4999993, 3.4999993)
+shape = SubResource("RectangleShape2D_xlwfv")
+debug_color = Color(0.7288826, 0.5162208, 0.26735866, 0.41960785)
+
+[node name="cupula" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cupula"]
+position = Vector2(-36.999992, -33)
+rotation = -0.6924718
+scale = Vector2(1, 1.4965389)
+shape = SubResource("RectangleShape2D_cgfde")
+debug_color = Color(0.7191568, 0.31430665, 0.90749973, 0.41960785)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="cupula"]
+position = Vector2(37, -29.000002)
+rotation = 0.7709461
+scale = Vector2(0.99999994, 1.7771397)
+shape = SubResource("RectangleShape2D_cgfde")
+debug_color = Color(0.7191568, 0.31430665, 0.90749973, 0.41960785)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="cupula"]
+position = Vector2(49, -0.99999994)
+rotation = 1.5419275
+scale = Vector2(0.9753225, 1.593461)
+shape = SubResource("RectangleShape2D_cgfde")
+debug_color = Color(0.7191568, 0.31430665, 0.90749973, 0.41960785)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="cupula"]
+position = Vector2(-48.00138, -3.497219)
+rotation = -1.5735722
+scale = Vector2(0.9753225, 1.6996856)
+shape = SubResource("RectangleShape2D_cgfde")
+debug_color = Color(0.7191568, 0.31430665, 0.90749973, 0.41960785)
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="cupula"]
+position = Vector2(1, -40)
+rotation = -3.1310034
+scale = Vector2(0.97532237, 1.3289075)
+shape = SubResource("RectangleShape2D_cgfde")
+debug_color = Color(0.7191568, 0.31430665, 0.90749973, 0.41960785)
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="cupula"]
+position = Vector2(-4.656611e-09, 49)
+rotation = -0.015390645
+scale = Vector2(1.3476491, 1.7965267)
+shape = SubResource("RectangleShape2D_cgfde")
+debug_color = Color(0.7191568, 0.31430665, 0.90749973, 0.41960785)
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="cupula"]
+position = Vector2(-40, 32.999996)
+rotation = -2.2454622
+scale = Vector2(0.95278805, 2.067841)
+shape = SubResource("RectangleShape2D_cgfde")
+debug_color = Color(0.7191568, 0.31430665, 0.90749973, 0.41960785)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="cupula"]
+position = Vector2(43, 35.000004)
+rotation = 2.3561945
+scale = Vector2(0.9753225, 1.4364724)
+shape = SubResource("RectangleShape2D_cgfde")
+debug_color = Color(0.7191568, 0.31430665, 0.90749973, 0.41960785)
+
+[node name="fuegojetpack" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(-2.3841858e-07, 8)
+scale = Vector2(0.171875, 0.171875)
+sprite_frames = SubResource("SpriteFrames_6hcl0")
+frame_progress = 0.94080395
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqk23dhwfdsp5"]
+
+[ext_resource type="Texture2D" uid="uid://cvaacihcjwvp4" path="res://Assets/Fondos/Blue Nebula/Blue_Nebula_04-512x512.png" id="1_2gckq"]
+[ext_resource type="Texture2D" uid="uid://bel0aitpy10re" path="res://Assets/UI/mouse 1.png" id="2_i3ln2"]
+[ext_resource type="Texture2D" uid="uid://dn507c8035lgc" path="res://Assets/UI/mouse derecha.png" id="3_35xyp"]
+[ext_resource type="Texture2D" uid="uid://c8gb6g6dbrfma" path="res://Assets/UI/mouse izquierda.png" id="4_87pfy"]
+[ext_resource type="Texture2D" uid="uid://demnxfr2w5xv4" path="res://Assets/UI/letra a blanca.png" id="5_aurty"]
+[ext_resource type="Texture2D" uid="uid://brpuvwk20p2ac" path="res://Assets/UI/LETRA D.png" id="6_qrsp5"]
+[ext_resource type="Texture2D" uid="uid://b5eyamwnc8ayf" path="res://Assets/UI/letra E blanca.png" id="7_nln3x"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bjn0m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i3ln2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_i3ln2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_35xyp")
+}],
+"loop": true,
+"name": &"mousederecha",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i3ln2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_i3ln2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_87pfy")
+}],
+"loop": true,
+"name": &"mouseizquierda",
+"speed": 3.0
+}]
+
+[node name="Controles" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlueNebula04512x512" type="Sprite2D" parent="."]
+position = Vector2(572, 324)
+scale = Vector2(2.296875, 1.296875)
+texture = ExtResource("1_2gckq")
+
+[node name="mousederecha" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(935.66003, 410.40057)
+scale = Vector2(8.943183, 8.150036)
+sprite_frames = SubResource("SpriteFrames_bjn0m")
+animation = &"mousederecha"
+
+[node name="A" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(160.95374, 413.13736)
+scale = Vector2(9.992883, 9.106642)
+texture = ExtResource("5_aurty")
+
+[node name="D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(383.66, 410.40057)
+scale = Vector2(9.992883, 9.106642)
+texture = ExtResource("6_qrsp5")
+
+[node name="E" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(631.66, 410.40057)
+scale = Vector2(9.590862, 8.740275)
+texture = ExtResource("7_nln3x")

@@ -12,4 +12,4 @@ func _process(_delta: float) -> void:
 
 
 func _on_button_pressed() -> void:
-	SceneManager.cambiar_escena("res://Escenas/main.tscn")
+	SceneManager.cambiar_escena("")
