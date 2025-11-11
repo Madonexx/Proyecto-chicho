@@ -20,7 +20,6 @@ func _process(_delta):
 func update_ui():
 	parts_label.text = "Partes: %d / %d" % [parts_collected, total_parts_to_win]
 	
-
 	
 func deliver_part():
 	parts_collected += 1

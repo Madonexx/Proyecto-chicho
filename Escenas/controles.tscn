@@ -1,0 +1,304 @@
+[gd_scene load_steps=20 format=3 uid="uid://cqk23dhwfdsp5"]
+
+[ext_resource type="Texture2D" uid="uid://cvaacihcjwvp4" path="res://Assets/Fondos/Blue Nebula/Blue_Nebula_04-512x512.png" id="1_2gckq"]
+[ext_resource type="Script" uid="uid://dg72ukhcrhvmk" path="res://Scripts/controles.gd" id="1_43ocl"]
+[ext_resource type="Texture2D" uid="uid://bel0aitpy10re" path="res://Assets/UI/mouse 1.png" id="2_i3ln2"]
+[ext_resource type="Texture2D" uid="uid://dn507c8035lgc" path="res://Assets/UI/mouse derecha.png" id="3_35xyp"]
+[ext_resource type="Texture2D" uid="uid://c8gb6g6dbrfma" path="res://Assets/UI/mouse izquierda.png" id="4_87pfy"]
+[ext_resource type="Texture2D" uid="uid://demnxfr2w5xv4" path="res://Assets/UI/letra a blanca.png" id="5_aurty"]
+[ext_resource type="Texture2D" uid="uid://brpuvwk20p2ac" path="res://Assets/UI/LETRA D.png" id="6_qrsp5"]
+[ext_resource type="Texture2D" uid="uid://b5eyamwnc8ayf" path="res://Assets/UI/letra E blanca.png" id="7_nln3x"]
+[ext_resource type="FontFile" uid="uid://dnh1mfrwh5jr4" path="res://Assets/UI/Minecraft.ttf" id="9_2oa50"]
+[ext_resource type="Texture2D" uid="uid://dq6ml5bt7ni8m" path="res://Assets/UI/Captura de pantalla 2025-11-11 184228.png" id="10_j6w3y"]
+[ext_resource type="Texture2D" uid="uid://d30yxd0nmy4df" path="res://Assets/UI/agarrarimagen.png" id="11_enwxh"]
+[ext_resource type="Texture2D" uid="uid://dmy3eiuvv08d" path="res://Assets/UI/asteroides.png" id="12_sokvl"]
+[ext_resource type="Texture2D" uid="uid://duvijdsu1ue3s" path="res://Assets/UI/Cohetes.png" id="13_wglsn"]
+[ext_resource type="Texture2D" uid="uid://dsbcl6nf48odq" path="res://Assets/UI/acercar.png" id="14_j6w3y"]
+[ext_resource type="Texture2D" uid="uid://e836cexgenbn" path="res://Assets/UI/fondo negro.png" id="15_enwxh"]
+[ext_resource type="Texture2D" uid="uid://c4w12jngky8lc" path="res://Assets/UI/flecha.png" id="16_sokvl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bjn0m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i3ln2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_i3ln2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_35xyp")
+}],
+"loop": true,
+"name": &"mousederecha",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i3ln2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_i3ln2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_87pfy")
+}],
+"loop": true,
+"name": &"mouseizquierda",
+"speed": 3.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_srqrc"]
+font = ExtResource("9_2oa50")
+font_size = 19
+
+[sub_resource type="LabelSettings" id="LabelSettings_l3qgu"]
+font = ExtResource("9_2oa50")
+font_size = 29
+
+[node name="Controles" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_43ocl")
+
+[node name="BlueNebula04512x512" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(572, 324)
+scale = Vector2(2.296875, 1.296875)
+texture = ExtResource("1_2gckq")
+
+[node name="mousederecha" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1040, 400.00003)
+scale = Vector2(7.6264014, 6.950036)
+sprite_frames = SubResource("SpriteFrames_bjn0m")
+animation = &"mousederecha"
+
+[node name="mouseizquierda" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(856.0224, 400.00003)
+scale = Vector2(7.6264014, 6.950036)
+sprite_frames = SubResource("SpriteFrames_bjn0m")
+animation = &"mousederecha"
+
+[node name="A" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(168, 512)
+scale = Vector2(9.992883, 9.106642)
+texture = ExtResource("5_aurty")
+
+[node name="D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(400, 520)
+scale = Vector2(9.992883, 9.106642)
+texture = ExtResource("6_qrsp5")
+
+[node name="E" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(631.66, 410.40057)
+scale = Vector2(9.590862, 8.740275)
+texture = ExtResource("7_nln3x")
+
+[node name="Button" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 960.0
+offset_top = 552.0
+offset_right = 1022.0
+offset_bottom = 583.0
+scale = Vector2(2.5049021, 2.5049021)
+text = "JUGAR!"
+
+[node name="derecha" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 296.0
+offset_top = 264.0
+offset_right = 437.0
+offset_bottom = 287.0
+scale = Vector2(1.3599988, 1.3599988)
+text = "Mover Derecha"
+label_settings = SubResource("LabelSettings_srqrc")
+
+[node name="izquierda" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 64.0
+offset_top = 264.0
+offset_right = 212.0
+offset_bottom = 287.0
+scale = Vector2(1.3599988, 1.3599988)
+text = "Mover Izquierda"
+label_settings = SubResource("LabelSettings_srqrc")
+
+[node name="agarrar" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 533.0
+offset_top = 260.0
+offset_right = 694.0
+offset_bottom = 283.0
+scale = Vector2(1.3599988, 1.3599988)
+text = "Enganchar Parte"
+label_settings = SubResource("LabelSettings_srqrc")
+
+[node name="acercar" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 999.99994
+offset_top = 230.99998
+offset_right = 1077.0
+offset_bottom = 253.99998
+scale = Vector2(1.3599988, 1.3599988)
+text = "Acercar"
+label_settings = SubResource("LabelSettings_srqrc")
+
+[node name="alejar" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 826.99994
+offset_top = 229.99998
+offset_right = 883.99994
+offset_bottom = 252.99998
+scale = Vector2(1.3599988, 1.3599988)
+text = "Alejar"
+label_settings = SubResource("LabelSettings_srqrc")
+
+[node name="CapturaDePantalla20251111184228" type="Sprite2D" parent="."]
+position = Vector2(858.75, 114.73479)
+scale = Vector2(0.40028885, 0.40028888)
+texture = ExtResource("10_j6w3y")
+
+[node name="Agarrarimagen" type="Sprite2D" parent="."]
+position = Vector2(632, 120)
+scale = Vector2(0.50000006, 0.5)
+texture = ExtResource("11_enwxh")
+
+[node name="CUIDADO" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 94.0
+offset_bottom = 39.0
+text = "CUIDADO!"
+label_settings = SubResource("LabelSettings_l3qgu")
+
+[node name="TRAE Y LLEVA A LA NAVE" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 192.0
+offset_top = 16.0
+offset_right = 469.0
+offset_bottom = 46.0
+text = "LLEVAR A LA NAVE"
+label_settings = SubResource("LabelSettings_l3qgu")
+
+[node name="Asteroides" type="Sprite2D" parent="."]
+position = Vector2(88, 128)
+scale = Vector2(0.6666667, 0.6666667)
+texture = ExtResource("12_sokvl")
+
+[node name="Cohetes" type="Sprite2D" parent="."]
+position = Vector2(328, 136)
+texture = ExtResource("13_wglsn")
+
+[node name="Acercar" type="Sprite2D" parent="."]
+position = Vector2(1048, 112)
+scale = Vector2(0.5300634, 0.5300634)
+texture = ExtResource("14_j6w3y")
+
+[node name="FondoNegro" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(86.45816, 26.871033)
+scale = Vector2(16.308369, 8.851586)
+texture = ExtResource("15_enwxh")
+
+[node name="FondoNegro2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(328.72906, 25)
+scale = Vector2(29.054184, 8.851586)
+texture = ExtResource("15_enwxh")
+
+[node name="FondoNegro3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(411.8645, 275)
+scale = Vector2(70.427086, 8.851586)
+texture = ExtResource("15_enwxh")
+
+[node name="FondoNegro4" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(966.5, 241.99997)
+scale = Vector2(31.300007, 8.851586)
+texture = ExtResource("15_enwxh")
+
+[node name="FondoNegro5" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(89.249985, 128.43552)
+scale = Vector2(14.150004, 28.625793)
+texture = ExtResource("15_enwxh")
+
+[node name="FondoNegro6" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(328, 135.28224)
+scale = Vector2(14.150004, 30.512894)
+texture = ExtResource("15_enwxh")
+
+[node name="FondoNegro7" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(632, 120.50001)
+scale = Vector2(21.800003, 31.399998)
+texture = ExtResource("15_enwxh")
+
+[node name="FondoNegro8" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(858.5, 114.60889)
+scale = Vector2(14.9000025, 30.156452)
+texture = ExtResource("15_enwxh")
+
+[node name="FondoNegro9" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1049.25, 111.304436)
+scale = Vector2(17.949993, 27.478226)
+texture = ExtResource("15_enwxh")
+
+[node name="Acercar2" type="Sprite2D" parent="."]
+position = Vector2(162.5, 383.3911)
+scale = Vector2(0.5300634, 0.5300634)
+texture = ExtResource("14_j6w3y")
+
+[node name="FondoNegro10" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(163.75, 382.6956)
+scale = Vector2(17.949993, 27.478226)
+texture = ExtResource("15_enwxh")
+
+[node name="Acercar3" type="Sprite2D" parent="."]
+position = Vector2(397.49997, 384.39108)
+scale = Vector2(0.5300634, 0.5300634)
+texture = ExtResource("14_j6w3y")
+
+[node name="FondoNegro11" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(398.74997, 383.69556)
+scale = Vector2(17.949993, 27.478226)
+texture = ExtResource("15_enwxh")
+
+[node name="Flecha" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(128, 368)
+scale = Vector2(1.4919405, 1.4919405)
+texture = ExtResource("16_sokvl")
+
+[node name="Flecha2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(440, 376)
+scale = Vector2(1.5599952, 1.5599952)
+texture = ExtResource("16_sokvl")
+flip_h = true
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
