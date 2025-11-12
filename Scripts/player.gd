@@ -178,7 +178,7 @@ func drop_part():
 		return
 		
 	print("Parte soltada.")
-	carried_part.drop(false)
+	carried_part.soltar_parte()
 	carried_part = null
 	
 
