@@ -4,7 +4,6 @@ extends CharacterBody2D
 @export var vel_jetpack_jugador: float = 150
 @onready var planet: RigidBody2D = $"../Planet"
 @onready var gravedad = 1
-@onready var can_move = true
 @export var superficie_planeta: float = 52
 var angulo_actual: float = 0.0
 var radio_actual: float = 50.0
@@ -36,33 +35,12 @@ func _physics_process(delta: float) -> void:
 	if pos_actual_parte:
 		var distancia_x = global_position.x - pos_actual_parte.global_position.x
 		var distancia_y = global_position.y - pos_actual_parte.global_position.y
-		distancia_parte = abs(distancia_x + distancia_y) 
-		
-	if distancia_parte > 70:
-		if parte_enganchada:
-			drop_part()
+		distancia_parte = abs(distancia_x + distancia_y)
 	
-	if Input.is_action_pressed("izquierda") and can_move == true:
-		angulo_actual -= vel_rotacion_jugador * delta
-		sprite_2d.flip_h = true
-		gancho.flip_h = true
-		gancho.offset.x = 30
-	
-	if Input.is_action_pressed("derecha") and can_move == true:
-		angulo_actual += vel_rotacion_jugador * delta
-		sprite_2d.flip_h = false
-		gancho.flip_h = false
-		gancho.offset.x = -30
-
-	if Input.is_action_pressed("alejar") and can_move == true:
-		particulas_jetpack()
-		if gravedad > 1:
-			gravedad /= 2
-		radio_actual += vel_jetpack_jugador * delta
-		
+	mover_personaje(delta)
+	usar_jetpack(delta)
 	radio_actual = max(radio_actual, superficie_planeta)
-
-
+	
 	var centro_planeta = planet.global_position
 	var desplazamiento = Vector2.RIGHT.rotated(angulo_actual) * radio_actual
 	global_position = centro_planeta + desplazamiento
@@ -71,6 +49,26 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("interact"):
 		soltar_o_agarrar()
+	
+func mover_personaje(delta):
+	if Input.is_action_pressed("izquierda"):
+		angulo_actual -= vel_rotacion_jugador * delta
+		sprite_2d.flip_h = true
+		gancho.flip_h = true
+		gancho.offset.x = 30
+	
+	if Input.is_action_pressed("derecha"):
+		angulo_actual += vel_rotacion_jugador * delta
+		sprite_2d.flip_h = false
+		gancho.flip_h = false
+		gancho.offset.x = -30
+
+func usar_jetpack(delta):
+	if Input.is_action_pressed("alejar"):
+		particulas_jetpack()
+		if gravedad > 1:
+			gravedad /= 2
+		radio_actual += vel_jetpack_jugador * delta
 
 func soltar_o_agarrar():
 	if parte_enganchada:
@@ -151,7 +149,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("asteroids"):
 		print("¡CHOQUE! Has perdido.")
-		can_move = false
+		set_physics_process(false)
 		animated_sprite_2d.visible = true
 		sprite_2d.visible = false
 		animated_sprite_2d.play()
