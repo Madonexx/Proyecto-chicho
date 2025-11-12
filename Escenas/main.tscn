@@ -62,9 +62,8 @@ z_index = -10
 position = Vector2(53, -145)
 texture = ExtResource("6_crgrh")
 
-[node name="Player" parent="." node_paths=PackedStringArray("planet_node") instance=ExtResource("4_7xwpo")]
+[node name="Player" parent="." instance=ExtResource("4_7xwpo")]
 position = Vector2(1, -52)
-planet_node = NodePath("../Planet/Planet")
 
 [node name="Asteroid" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("5_2ia52")]
 position = Vector2(-191, -71)
@@ -120,5 +119,5 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_n3qho")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(312, 6)
+position = Vector2(315, 7)
 shape = SubResource("RectangleShape2D_n3qho")

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var vel_rotacion_jugador: float = 2.5
 @export var vel_jetpack_jugador: float = 150
-@export var planet_node: Area2D 
+@onready var planet: RigidBody2D = $"../Planet"
 @onready var gravedad = 1
 @onready var can_move = true
 @export var superficie_planeta: float = 52
@@ -10,9 +10,9 @@ var angulo_actual: float = 0.0
 var radio_actual: float = 50.0
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-var fragmento_enganchado: RigidBody2D = null
+var parte_enganchada: RigidBody2D = null
 @onready var distancia_parte = 0
-@onready var pos_actual_fragmento
+@onready var pos_actual_parte
 @onready var area_de_enganche: Area2D = $gancho
 @onready var gancho: Sprite2D = $gancho/Sprite2D
 
@@ -21,34 +21,25 @@ var fragmento_enganchado: RigidBody2D = null
 @onready var muerte: AudioStreamPlayer2D = $muerte
 
 func _ready():
-	# Calcula la posición inicial basada en dónde lo pusiste en el editor
-	if planet_node:
-		#
-		var start_vector = global_position - planet_node.global_position
-		angulo_actual = start_vector.angle()
-		radio_actual = start_vector.length()
+	if planet:
+		var vector_inicial = global_position - planet.global_position
+		angulo_actual = vector_inicial.angle()
+		radio_actual = vector_inicial.length()
 
 func _physics_process(delta: float) -> void:
-	#arregla la hiper velocidad del pj al alejarse del planeta
-	
-	
 	vel_rotacion_jugador = 100 / radio_actual
 	vel_jetpack_jugador = 150
-	if fragmento_enganchado:
+	if parte_enganchada:
 		vel_rotacion_jugador /= 2
-		#radial_speed /= 1.4
-	
 	caida(delta)
 	
-	
-	#por si la parte de la nave se bugea y se aleja del jugador
-	if pos_actual_fragmento:
-		var distancia_x = global_position.x - pos_actual_fragmento.global_position.x
-		var distancia_y = global_position.y - pos_actual_fragmento.global_position.y
+	if pos_actual_parte:
+		var distancia_x = global_position.x - pos_actual_parte.global_position.x
+		var distancia_y = global_position.y - pos_actual_parte.global_position.y
 		distancia_parte = abs(distancia_x + distancia_y) 
 		
 	if distancia_parte > 70:
-		if fragmento_enganchado:
+		if parte_enganchada:
 			drop_part()
 	
 	if Input.is_action_pressed("izquierda") and can_move == true:
@@ -74,31 +65,22 @@ func _physics_process(delta: float) -> void:
 		
 	radio_actual = max(radio_actual, superficie_planeta)
 
-	# Posiciones
-	# Obtenemos la posición central del planeta
-	var planet_center = planet_node.global_position
-	# Calculamos el offset (desplazamiento)
-	var offset = Vector2.RIGHT.rotated(angulo_actual) * radio_actual
-	global_position = planet_center + offset
 
-	# Hacemos que los "pies" apunten al planeta
-	var direction_to_planet = (planet_center - global_position).normalized()
+	var centro_planeta = planet.global_position
+	var desplazamiento = Vector2.RIGHT.rotated(angulo_actual) * radio_actual
+	global_position = centro_planeta + desplazamiento
+	var direction_to_planet = (centro_planeta - global_position).normalized()
 	rotation = direction_to_planet.angle() - deg_to_rad(90)
 
-	# --- 6. Lógica de Agarre
 	if Input.is_action_just_pressed("interact"):
-		if fragmento_enganchado:
-			drop_part()
-		else:
-			pickup_part()
-	
-	#if carried_part:
-		# Calculamos el offset "arriba" del jugador, rotado con el jugador
-		#var rotated_offset = carry_offset.rotated(rotation)
-		# Movemos la parte a esa posición global
-		#carried_part.global_position = global_position + rotated_offset
-		# (Opcional) hacer que la parte rote junto con el jugador
-		#carried_part.rotation = rotation
+		soltar_o_agarrar()
+
+func soltar_o_agarrar():
+	if parte_enganchada:
+		drop_part()
+	else:
+		pickup_part()
+			
 func particulas_jetpack():
 	var num = randi_range(1,4)
 	var num2 = randi_range(-5, 5)
@@ -122,7 +104,7 @@ func duplicar_borrar(num, num2, num3):
 		copia_fuego.position.x += num2 
 		copia_fuego.position.y += num3
 		add_child(copia_fuego)
-		copia_fuego.reparent(planet_node)
+		copia_fuego.reparent(planet)
 		await get_tree().create_timer(0.4).timeout
 		copia_fuego.queue_free()
 
@@ -136,10 +118,9 @@ func pickup_part():
 	for body in bodies:
 		if body.is_in_group("ship_parts"):
 			gancho.visible = true
-			#es importante que el sprite este donde esta para que esto fucione
-			pos_actual_fragmento = body.get_child(0)
-			fragmento_enganchado = body
-			fragmento_enganchado.pickup()
+			pos_actual_parte = body.get_child(0)
+			parte_enganchada = body
+			parte_enganchada.pickup()
 			print("Parte agarrada")
 			break
 
@@ -150,24 +131,25 @@ func drop_part():
 	
 	for area in areas:
 		if area.is_in_group("ship_base"):
-			print("¡Parte entregada!")
-			get_parent().deliver_part()
-			fragmento_enganchado.queue_free()
+			entregar_parte()
 			delivered = true
 			break
 
 	if delivered:
-		fragmento_enganchado = null
+		parte_enganchada = null
 		return
 		
 	print("Parte soltada.")
-	fragmento_enganchado.soltar_parte()
-	fragmento_enganchado = null
+	parte_enganchada.soltar_parte()
+	parte_enganchada = null
 
-
+func entregar_parte():
+	print("¡Parte entregada!")
+	get_parent().deliver_part()
+	parte_enganchada.queue_free()
+	
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	radio_actual -= vel_jetpack_jugador * 0.1
-
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("asteroids"):
@@ -178,5 +160,4 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		animated_sprite_2d.play()
 		muerte.play()
 		await animated_sprite_2d.animation_finished
-		
 		SceneManager.cambiar_escena("res://Escenas/Defeat.tscn")
