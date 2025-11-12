@@ -1,34 +1,23 @@
 extends CharacterBody2D
-# --- Variables de Movimiento ---
-@export var rotation_speed: float = 2.5   # Velocidad de A/D (radianes/seg)
-@export var radial_speed: float = 150.0  # Velocidad del mouse (píxeles/seg)
+
+@export var vel_rotacion_jugador: float = 2.5
+@export var vel_jetpack_jugador: float = 150
 @export var planet_node: Area2D 
 @onready var gravedad = 1
 @onready var can_move = true
-# Distancia max y min sobre el radio del planeta.
-@export var min_radius: float = 52.0 
-@export var max_radius: float = 600.0
-var current_angle: float = 0.0     # Nuestro ángulo orbital
-var current_radius: float = 50.0  # Nuestra distancia al centro
+@export var superficie_planeta: float = 52
+var angulo_actual: float = 0.0
+var radio_actual: float = 50.0
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-# --- Variables de Agarre 
-var carried_part: RigidBody2D = null
-
-@onready var grabber_area: Area2D = $gancho
+var fragmento_enganchado: RigidBody2D = null
+@onready var distancia_parte = 0
+@onready var pos_actual_fragmento
+@onready var area_de_enganche: Area2D = $gancho
 @onready var gancho: Sprite2D = $gancho/Sprite2D
-#Variable de offset entre el asset del astronauta y el asset de la parte
-@export var carry_offset: Vector2 = Vector2(0, -20)
 
-@onready var distanciaparte = 0
-@onready var partedenaveahora
-
-#animaciones
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var fuegojetpack: AnimatedSprite2D = $fuegojetpack
-
-
-#sonidos del player
+@onready var fuego_jetpack: AnimatedSprite2D = $fuegojetpack
 @onready var muerte: AudioStreamPlayer2D = $muerte
 
 func _ready():
@@ -36,70 +25,60 @@ func _ready():
 	if planet_node:
 		#
 		var start_vector = global_position - planet_node.global_position
-		current_angle = start_vector.angle()
-		current_radius = start_vector.length()
+		angulo_actual = start_vector.angle()
+		radio_actual = start_vector.length()
 
 func _physics_process(delta: float) -> void:
 	#arregla la hiper velocidad del pj al alejarse del planeta
 	
 	
-	rotation_speed = 100 / current_radius
-	radial_speed = 150
-	if carried_part:
-		rotation_speed /= 2
+	vel_rotacion_jugador = 100 / radio_actual
+	vel_jetpack_jugador = 150
+	if fragmento_enganchado:
+		vel_rotacion_jugador /= 2
 		#radial_speed /= 1.4
 	
-	if can_move == true:
-		caida(delta)
+	caida(delta)
 	
 	
 	#por si la parte de la nave se bugea y se aleja del jugador
-	if partedenaveahora:
-		var distanciax = global_position.x - partedenaveahora.global_position.x
-		var distanciay = global_position.y - partedenaveahora.global_position.y
-		distanciaparte = abs(distanciax + distanciay) 
+	if pos_actual_fragmento:
+		var distancia_x = global_position.x - pos_actual_fragmento.global_position.x
+		var distancia_y = global_position.y - pos_actual_fragmento.global_position.y
+		distancia_parte = abs(distancia_x + distancia_y) 
 		
-	if distanciaparte > 70:
-		if carried_part:
+	if distancia_parte > 70:
+		if fragmento_enganchado:
 			drop_part()
 	
-	if Input.is_action_pressed("izquierda") and can_move == true: # A o flecha izq
-		current_angle -= rotation_speed * delta
+	if Input.is_action_pressed("izquierda") and can_move == true:
+		angulo_actual -= vel_rotacion_jugador * delta
 		sprite_2d.flip_h = true
 		gancho.flip_h = true
 		gancho.offset.x = 30
 	
-	if Input.is_action_pressed("derecha") and can_move == true: # D o flecha der
-		current_angle += rotation_speed * delta
+	if Input.is_action_pressed("derecha") and can_move == true:
+		angulo_actual += vel_rotacion_jugador * delta
 		sprite_2d.flip_h = false
 		gancho.flip_h = false
 		gancho.offset.x = -30
 
-	if Input.is_action_pressed("acercar") and can_move == true: # Click Izq
-		current_radius -= radial_speed * delta
+	if Input.is_action_pressed("acercar") and can_move == true:
+		radio_actual -= vel_jetpack_jugador * delta
 
-	
-	if Input.is_action_pressed("alejar") and can_move == true: # Click der
-		#numero para la rotacion
-		var num = randi_range(1,4)
-		#numero para el ejex
-		var num2 = randi_range(-5, 5)
-		#numero para el ejeY
-		var num3 = randi_range(-5, 2)
-		duplicar_borrar(num, num2, num3)
+	if Input.is_action_pressed("alejar") and can_move == true:
+		particulas_jetpack()
 		if gravedad > 1:
 			gravedad /= 2
-			#gravedad = gravedad - 4.5
-		current_radius += radial_speed * delta
+		radio_actual += vel_jetpack_jugador * delta
 		
-	# Evita que el jugador se meta al planeta o se vaya muy lejos
-	current_radius = clamp(current_radius, min_radius, max_radius)
+	radio_actual = max(radio_actual, superficie_planeta)
 
 	# Posiciones
 	# Obtenemos la posición central del planeta
 	var planet_center = planet_node.global_position
 	# Calculamos el offset (desplazamiento)
-	var offset = Vector2.RIGHT.rotated(current_angle) * current_radius
+	var offset = Vector2.RIGHT.rotated(angulo_actual) * radio_actual
 	global_position = planet_center + offset
 
 	# Hacemos que los "pies" apunten al planeta
@@ -108,7 +87,7 @@ func _physics_process(delta: float) -> void:
 
 	# --- 6. Lógica de Agarre
 	if Input.is_action_just_pressed("interact"):
-		if carried_part:
+		if fragmento_enganchado:
 			drop_part()
 		else:
 			pickup_part()
@@ -120,48 +99,52 @@ func _physics_process(delta: float) -> void:
 		#carried_part.global_position = global_position + rotated_offset
 		# (Opcional) hacer que la parte rote junto con el jugador
 		#carried_part.rotation = rotation
-
+func particulas_jetpack():
+	var num = randi_range(1,4)
+	var num2 = randi_range(-5, 5)
+	var num3 = randi_range(-5, 2)
+	duplicar_borrar(num, num2, num3)
+		
 func duplicar_borrar(num, num2, num3):
-		var copiafuego = fuegojetpack.duplicate()
-		copiafuego.visible = true
-		copiafuego.play()
+		var copia_fuego = fuego_jetpack.duplicate()
+		copia_fuego.visible = true
+		copia_fuego.play()
 		
 		if num == 1:
-			copiafuego.rotation = 0
+			copia_fuego.rotation = 0
 		elif num == 2:
-			copiafuego.rotation = 90
+			copia_fuego.rotation = 90
 		elif num == 3:
-			copiafuego.rotation = 180
+			copia_fuego.rotation = 180
 		else:
-			copiafuego.rotation = 270
+			copia_fuego.rotation = 270
 		
-		copiafuego.position.x += num2 
-		copiafuego.position.y += num3
-		add_child(copiafuego)
-		copiafuego.reparent(planet_node)
+		copia_fuego.position.x += num2 
+		copia_fuego.position.y += num3
+		add_child(copia_fuego)
+		copia_fuego.reparent(planet_node)
 		await get_tree().create_timer(0.4).timeout
-		copiafuego.queue_free()
+		copia_fuego.queue_free()
 
 func caida(delta):
-	#limite de la gravedad maxima
 	if gravedad < 200:
 		gravedad += 2.3
-	current_radius -= gravedad * delta
+	radio_actual -= gravedad * delta
 
 func pickup_part():
-	var bodies = grabber_area.get_overlapping_bodies()
+	var bodies = area_de_enganche.get_overlapping_bodies()
 	for body in bodies:
 		if body.is_in_group("ship_parts"):
 			gancho.visible = true
 			#es importante que el sprite este donde esta para que esto fucione
-			partedenaveahora = body.get_child(0)
-			carried_part = body
-			carried_part.pickup()
+			pos_actual_fragmento = body.get_child(0)
+			fragmento_enganchado = body
+			fragmento_enganchado.pickup()
 			print("Parte agarrada")
 			break
 
 func drop_part():
-	var areas = grabber_area.get_overlapping_areas()
+	var areas = area_de_enganche.get_overlapping_areas()
 	var delivered = false
 	gancho.visible = false
 	
@@ -169,28 +152,21 @@ func drop_part():
 		if area.is_in_group("ship_base"):
 			print("¡Parte entregada!")
 			get_parent().deliver_part()
-			carried_part.queue_free()
+			fragmento_enganchado.queue_free()
 			delivered = true
 			break
 
 	if delivered:
-		carried_part = null
+		fragmento_enganchado = null
 		return
 		
 	print("Parte soltada.")
-	carried_part.soltar_parte()
-	carried_part = null
-	
-
-#Condicion de derrota
-
-#func _on_area_entered(area: Area2D) -> void:
-	
-		
+	fragmento_enganchado.soltar_parte()
+	fragmento_enganchado = null
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	current_radius -= radial_speed * 0.1
+	radio_actual -= vel_jetpack_jugador * 0.1
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

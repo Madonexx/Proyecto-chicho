@@ -65,7 +65,6 @@ texture = ExtResource("6_crgrh")
 [node name="Player" parent="." node_paths=PackedStringArray("planet_node") instance=ExtResource("4_7xwpo")]
 position = Vector2(1, -52)
 planet_node = NodePath("../Planet/Planet")
-min_radius = 52.0
 
 [node name="Asteroid" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("5_2ia52")]
 position = Vector2(-191, -71)
