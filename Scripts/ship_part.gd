@@ -1,11 +1,8 @@
 extends RigidBody2D
 
 var is_being_carried: bool = false
-
 @onready var sprite_2d: Sprite2D = $Sprite2D
-
 @onready var soga: Sprite2D = $soga
-
 @onready var posiciontemporal = Vector2(0,0)
 
 func _physics_process(_delta: float) -> void:
