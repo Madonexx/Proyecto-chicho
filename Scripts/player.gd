@@ -54,9 +54,6 @@ func _physics_process(delta: float) -> void:
 		gancho.flip_h = false
 		gancho.offset.x = -30
 
-	if Input.is_action_pressed("acercar") and can_move == true:
-		radio_actual -= vel_jetpack_jugador * delta
-
 	if Input.is_action_pressed("alejar") and can_move == true:
 		particulas_jetpack()
 		if gravedad > 1:
