@@ -26,6 +26,8 @@ size = Vector2(63.25, 588)
 script = ExtResource("1_0kh0y")
 
 [node name="Planet" type="RigidBody2D" parent="."]
+texture_filter = 1
+position = Vector2(576, 320)
 gravity_scale = 0.0
 freeze = true
 metadata/_edit_group_ = true
@@ -44,80 +46,94 @@ shape = SubResource("CircleShape2D_7xwpo")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="GravitationalCalibrator" type="TextureProgressBar" parent="UI"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 576.0
+offset_top = 320.0
+offset_right = 616.0
+offset_bottom = 360.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PartsLabel" type="Label" parent="UI"]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 48.0
+offset_bottom = 31.0
 label_settings = SubResource("LabelSettings_b1m0k")
 metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+position = Vector2(576, 320)
+zoom = Vector2(2.5, 2.5)
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -10
-position = Vector2(53, -145)
+position = Vector2(579, 205)
+scale = Vector2(1.1328125, 1.1328125)
 texture = ExtResource("6_crgrh")
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("4_7xwpo")]
-position = Vector2(1, -52)
+texture_filter = 1
+position = Vector2(577, 268)
 
 [node name="Asteroid" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("5_2ia52")]
-position = Vector2(-191, -71)
+texture_filter = 1
+position = Vector2(385, 249)
 planeta = NodePath("../Planet")
 
 [node name="Asteroid2" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("6_s2ilj")]
-position = Vector2(-160, 45)
+texture_filter = 1
+position = Vector2(416, 365)
 planeta = NodePath("../Planet")
 
 [node name="Asteroid3" parent="." node_paths=PackedStringArray("planeta") instance=ExtResource("7_s2ilj")]
-position = Vector2(120, -68)
+texture_filter = 1
+position = Vector2(696, 252)
 planeta = NodePath("../Planet")
 
 [node name="ShipBase" parent="." instance=ExtResource("8_ktoa8")]
-position = Vector2(49.000004, -19.000002)
+texture_filter = 1
+position = Vector2(625, 301)
 rotation = 1.1571532
 scale = Vector2(0.1, 0.1)
 
 [node name="ShipPart" parent="." instance=ExtResource("9_1md0r")]
-position = Vector2(177.99998, -123)
+position = Vector2(771, 251)
 
 [node name="ShipPart2" parent="." instance=ExtResource("9_1md0r")]
-position = Vector2(-230.00002, -125)
+position = Vector2(376, 189)
 
 [node name="ShipPart3" parent="." instance=ExtResource("9_1md0r")]
-position = Vector2(-195, 63)
+position = Vector2(430, 500)
 
 [node name="ShipPart4" parent="." instance=ExtResource("9_1md0r")]
-position = Vector2(68, 42)
+position = Vector2(701, 424)
 
 [node name="ShipPart5" parent="." instance=ExtResource("9_1md0r")]
-position = Vector2(-39, -131)
+position = Vector2(585, 109)
 
 [node name="level_music_1" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(576, 320)
 stream = ExtResource("10_n3qho")
 volume_db = -14.0
 autoplay = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(576, 320)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-317, -2)
+position = Vector2(-261, -3)
 shape = SubResource("RectangleShape2D_n3qho")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(3, 169.25)
+position = Vector2(-1, 261)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_n3qho")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, -190)
+position = Vector2(-2, -260)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_n3qho")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(315, 7)
+position = Vector2(260, 5)
 shape = SubResource("RectangleShape2D_n3qho")

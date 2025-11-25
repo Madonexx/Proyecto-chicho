@@ -17,10 +17,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -117.0
-offset_top = -418.0
-offset_right = 1924.0
-offset_bottom = 886.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1877.4219
+offset_bottom = 1198.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_jg0v5")
@@ -29,17 +29,19 @@ stretch_mode = 4
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-offset_right = 39.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 100
+offset_left = 29.0
+offset_top = 19.0
+offset_right = 823.0
+offset_bottom = 156.0
+theme_override_font_sizes/font_size = 90
 text = "Chicho en órbita"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 416.0
-offset_top = 360.0
+offset_top = 471.0
 offset_right = 738.0
-offset_bottom = 456.0
+offset_bottom = 567.0
 theme_override_font_sizes/font_size = 64
 text = "Comenzar"
 

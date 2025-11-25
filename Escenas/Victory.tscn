@@ -8,19 +8,20 @@
 layout_mode = 3
 anchors_preset = 0
 offset_left = 8.0
-offset_top = 72.0
+offset_top = 362.0
 offset_right = 48.0
-offset_bottom = 112.0
+offset_bottom = 402.0
 script = ExtResource("1_bdcpr")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -5
 layout_mode = 0
-offset_left = -8.0
-offset_top = -296.0
-offset_right = 1142.0
-offset_bottom = 728.0
+offset_left = -58.0
+offset_top = -372.0
+offset_right = 1259.334
+offset_bottom = 801.0
 texture = ExtResource("2_weo2q")
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0

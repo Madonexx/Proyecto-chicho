@@ -67,52 +67,55 @@ script = ExtResource("1_43ocl")
 
 [node name="BlueNebula04512x512" type="Sprite2D" parent="."]
 z_index = -2
-position = Vector2(572, 324)
-scale = Vector2(2.296875, 1.296875)
+texture_filter = 1
+position = Vector2(765.9999, 578.92865)
+scale = Vector2(4.0605474, 2.29269)
 texture = ExtResource("1_2gckq")
+metadata/_edit_lock_ = true
 
 [node name="mouseizquierda" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(930.1061, 425.129)
-scale = Vector2(7.6264014, 6.950036)
+position = Vector2(920.00006, 315.484)
+scale = Vector2(5.6569505, 5.1552505)
 sprite_frames = SubResource("SpriteFrames_bjn0m")
 animation = &"mousederecha"
 
 [node name="A" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(215.08368, 538.12897)
+position = Vector2(318.28384, 754.12897)
 scale = Vector2(9.992883, 9.106642)
 texture = ExtResource("5_aurty")
 
 [node name="D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(451.08368, 549.12897)
+position = Vector2(554.2838, 765.12897)
 scale = Vector2(9.992883, 9.106642)
 texture = ExtResource("6_qrsp5")
 
 [node name="E" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(693.0836, 562.12897)
+position = Vector2(796.28375, 778.12897)
 scale = Vector2(9.590862, 8.740275)
 texture = ExtResource("7_nln3x")
 
 [node name="Button" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 960.0
-offset_top = 552.0
-offset_right = 1022.0
-offset_bottom = 583.0
+offset_left = 454.0
+offset_top = 943.0
+offset_right = 553.80426
+offset_bottom = 992.9021
 scale = Vector2(2.5049021, 2.5049021)
-text = "JUGAR!"
+theme_override_font_sizes/font_size = 25
+text = "JUGAR"
 
 [node name="derecha" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 351.08368
-offset_top = 307.12897
-offset_right = 492.08368
-offset_bottom = 330.12897
+offset_left = 454.28387
+offset_top = 523.129
+offset_right = 595.2839
+offset_bottom = 546.129
 scale = Vector2(1.3599988, 1.3599988)
 text = "Mover Derecha"
 label_settings = SubResource("LabelSettings_srqrc")
@@ -120,10 +123,10 @@ label_settings = SubResource("LabelSettings_srqrc")
 [node name="izquierda" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 111.08368
-offset_top = 307.12897
-offset_right = 259.08368
-offset_bottom = 330.12897
+offset_left = 214.28386
+offset_top = 523.129
+offset_right = 362.28387
+offset_bottom = 546.129
 scale = Vector2(1.3599988, 1.3599988)
 text = "Mover Izquierda"
 label_settings = SubResource("LabelSettings_srqrc")
@@ -131,10 +134,10 @@ label_settings = SubResource("LabelSettings_srqrc")
 [node name="agarrar" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 585.0837
-offset_top = 306.12897
-offset_right = 746.0837
-offset_bottom = 329.12897
+offset_left = 688.2838
+offset_top = 522.129
+offset_right = 849.2838
+offset_bottom = 545.129
 scale = Vector2(1.3599988, 1.3599988)
 text = "Enganchar Parte"
 label_settings = SubResource("LabelSettings_srqrc")
@@ -142,133 +145,133 @@ label_settings = SubResource("LabelSettings_srqrc")
 [node name="alejar" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 881.0836
-offset_top = 244.12895
-offset_right = 955.0836
-offset_bottom = 267.12897
+offset_left = 781.6249
+offset_top = 187.12889
+offset_right = 868.6249
+offset_bottom = 210.12889
 scale = Vector2(1.3599988, 1.3599988)
-text = "Jetpack"
+text = "JETPACK"
 label_settings = SubResource("LabelSettings_srqrc")
 
 [node name="CapturaDePantalla20251111184228" type="Sprite2D" parent="."]
-position = Vector2(932.8337, 139.86375)
+position = Vector2(784.75, 315.00104)
 scale = Vector2(0.40028885, 0.40028888)
 texture = ExtResource("10_j6w3y")
 
 [node name="Agarrarimagen" type="Sprite2D" parent="."]
-position = Vector2(690.0837, 420.12897)
+position = Vector2(793.2838, 636.12897)
 scale = Vector2(0.50000006, 0.5)
 texture = ExtResource("11_enwxh")
 
 [node name="CUIDADO" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 225.08368
-offset_top = 55.257935
-offset_right = 365.08368
-offset_bottom = 85.257935
+offset_left = 182.08365
+offset_top = 191.25793
+offset_right = 322.08365
+offset_bottom = 221.25793
 text = "CUIDADO!"
 label_settings = SubResource("LabelSettings_l3qgu")
 
 [node name="TRAE Y LLEVA A LA NAVE" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 427.08368
-offset_top = 54.128967
-offset_right = 704.0837
-offset_bottom = 84.12897
+offset_left = 391.54187
+offset_top = 193.129
+offset_right = 668.5419
+offset_bottom = 223.129
 text = "LLEVAR A LA NAVE"
 label_settings = SubResource("LabelSettings_l3qgu")
 
 [node name="Asteroides" type="Sprite2D" parent="."]
-position = Vector2(297.08368, 167.25793)
+position = Vector2(253.0836, 318.25793)
 scale = Vector2(0.6666667, 0.6666667)
 texture = ExtResource("12_sokvl")
 
 [node name="Cohetes" type="Sprite2D" parent="."]
-position = Vector2(563.0837, 174.12897)
+position = Vector2(527.5418, 313.129)
 texture = ExtResource("13_wglsn")
 
 [node name="FondoNegro" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(295.54184, 66.12897)
+position = Vector2(252.54184, 202.12897)
 scale = Vector2(16.308369, 8.851586)
 texture = ExtResource("15_enwxh")
 
 [node name="FondoNegro2" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(563.81274, 63.128963)
+position = Vector2(528.27094, 202.12897)
 scale = Vector2(29.054184, 8.851586)
 texture = ExtResource("15_enwxh")
 
 [node name="FondoNegro3" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(460.08368, 316.12897)
+position = Vector2(563.2838, 532.12897)
 scale = Vector2(72.05677, 8.851586)
 texture = ExtResource("15_enwxh")
 
 [node name="FondoNegro4" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(933.0837, 258.12897)
+position = Vector2(843.625, 197.12897)
 scale = Vector2(27.449987, 8.851586)
 texture = ExtResource("15_enwxh")
 hframes = 2
 
 [node name="FondoNegro5" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(298.33368, 167.69345)
+position = Vector2(254.33365, 318.69345)
 scale = Vector2(14.150004, 28.625793)
 texture = ExtResource("15_enwxh")
 
 [node name="FondoNegro6" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(563.0837, 173.41121)
+position = Vector2(527.5418, 312.41122)
 scale = Vector2(14.150004, 30.512894)
 texture = ExtResource("15_enwxh")
 
 [node name="FondoNegro7" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(690.0837, 420.62897)
+position = Vector2(793.2838, 636.62897)
 scale = Vector2(21.800003, 31.399998)
 texture = ExtResource("15_enwxh")
 
 [node name="FondoNegro8" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(932.5837, 139.73785)
+position = Vector2(784.5, 314.87512)
 scale = Vector2(14.9000025, 30.156452)
 texture = ExtResource("15_enwxh")
 
 [node name="Acercar2" type="Sprite2D" parent="."]
-position = Vector2(211.58365, 412.52005)
+position = Vector2(314.7838, 628.52)
 scale = Vector2(0.5300634, 0.5300634)
 texture = ExtResource("14_j6w3y")
 
 [node name="FondoNegro10" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(212.83365, 411.82452)
+position = Vector2(316.0338, 627.8246)
 scale = Vector2(17.949993, 27.478226)
 texture = ExtResource("15_enwxh")
 
 [node name="Acercar3" type="Sprite2D" parent="."]
-position = Vector2(448.58365, 413.52005)
+position = Vector2(551.7838, 629.52)
 scale = Vector2(0.5300634, 0.5300634)
 texture = ExtResource("14_j6w3y")
 
 [node name="FondoNegro11" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(449.83365, 412.82452)
+position = Vector2(553.0338, 628.8246)
 scale = Vector2(17.949993, 27.478226)
 texture = ExtResource("15_enwxh")
 
 [node name="Flecha" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(177.08365, 397.12894)
+position = Vector2(280.2838, 613.12897)
 scale = Vector2(1.4919405, 1.4919405)
 texture = ExtResource("16_sokvl")
 
 [node name="Flecha2" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(491.08368, 405.12897)
+position = Vector2(594.2838, 621.12897)
 scale = Vector2(1.5599952, 1.5599952)
 texture = ExtResource("16_sokvl")
 flip_h = true

@@ -17,20 +17,22 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1115.0
-offset_bottom = 614.0
+offset_left = -672.0
+offset_right = 1336.6238
+offset_bottom = 1120.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_nl6uj")
 expand_mode = 1
 stretch_mode = 6
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 464.0
-offset_top = 50.0
+offset_top = 134.0
 offset_right = 728.0
-offset_bottom = 167.0
+offset_bottom = 251.0
 theme_override_font_sizes/font_size = 64
 text = "Perdiste"
 horizontal_alignment = 1
@@ -39,17 +41,19 @@ vertical_alignment = 1
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 427.0
-offset_top = 177.0
+offset_top = 261.0
 offset_right = 744.0
-offset_bottom = 304.0
+offset_bottom = 388.0
+theme_override_font_sizes/font_size = 45
 text = "Volver a jugar"
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 432.0
-offset_top = 332.0
-offset_right = 744.0
-offset_bottom = 480.0
+offset_left = 419.0
+offset_top = 415.0
+offset_right = 750.0
+offset_bottom = 563.0
+theme_override_font_sizes/font_size = 45
 text = "Volver al Menú"
 
 [node name="musica" type="AudioStreamPlayer2D" parent="."]
